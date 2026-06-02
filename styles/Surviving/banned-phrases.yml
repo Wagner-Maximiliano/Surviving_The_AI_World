@@ -1,0 +1,27 @@
+# Surviving.banned-phrases
+# Catches corporate-speak that shouldn't appear in trade nonfiction.
+# Level: warning (not error) — author can override with a Vale comment if needed.
+
+extends: existence
+message: "Avoid corporate-speak: '%s'. Prefer a concrete verb or phrase."
+level: warning
+ignorecase: true
+tokens:
+  - leverage
+  - leveraging
+  - synergy
+  - synergies
+  - at the end of the day
+  - going forward
+  - circle back
+  - touch base
+  - move the needle
+  - low-hanging fruit
+  - boil the ocean
+  - drill down
+  - paradigm shift
+  - mission-critical
+  - best-in-class
+  - holistic
+  - utilize
+  - utilization
