@@ -1,9 +1,9 @@
 # PLAN — Surviving the AI World
 
-**Status:** DRAFT → UNDER_REVIEW (CTO issue #1 open)
+**Status:** APPROVED
 **Architect:** claude-opus-4-7
-**CTO sign-off:** PENDING (issue #1)
-**Human approval:** PENDING (will be recorded in `docs/SIGN_OFF.md` and commit message after CTO approves)
+**CTO sign-off:** APPROVED — 2026-06-02, round 2, commit `d61d0db` (issue #1)
+**Human approval:** APPROVED — 2026-06-02, commit `d61d0db` (see `docs/SIGN_OFF.md`)
 **Skills applied:** architect-planning, mdp-project-kickoff, mdp-core, mdp-decision-gates, mdp-model-cost-governance, mdp-verification-rollback, mdp-context-budget, mdp-file-safety, github-workflow
 
 ## Goal
