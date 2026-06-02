@@ -1,9 +1,10 @@
 # PLAN — Surviving the AI World
 
-**Status:** DRAFT
+**Status:** DRAFT → UNDER_REVIEW (CTO issue #1 open)
 **Architect:** claude-opus-4-7
-**CTO sign-off:** PENDING
-**Human approval:** PENDING
+**CTO sign-off:** PENDING (issue #1)
+**Human approval:** PENDING (will be recorded in `docs/SIGN_OFF.md` and commit message after CTO approves)
+**Skills applied:** architect-planning, mdp-project-kickoff, mdp-core, mdp-decision-gates, mdp-model-cost-governance, mdp-verification-rollback, mdp-context-budget, mdp-file-safety, github-workflow
 
 ## Goal
 
@@ -48,8 +49,8 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 
 | #   | Title                                   | Why                                                            | Depends on | Suggested model | Rollback                            |
 |-----|-----------------------------------------|----------------------------------------------------------------|------------|-----------------|-------------------------------------|
-| 0.1 | Repo skeleton + directory layout        | Fixed structure unblocks every later task                      | —          | claude-code     | Delete created dirs; git revert     |
-| 0.2 | Pandoc build config (Makefile + defaults files, xelatex template) | Reproducible PDF/EPUB build                                    | 0.1        | hermes (gpt-5-codex) | Revert Makefile + `build/`     |
+| 0.1 | Repo skeleton + directory layout + ADR stubs | Fixed structure unblocks every later task; ADR stubs created here per Board-criteria flags | —          | claude-code     | Delete created dirs; git revert     |
+| 0.2 | Pandoc build config (Makefile + defaults files, xelatex template) `needs-adr: true` → ADR-001 | Reproducible PDF/EPUB build                                    | 0.1        | hermes (gpt-5-codex) | Revert Makefile + `build/`     |
 | 0.3 | Vale styles + proselint config tuned for calm/dry voice | Catches voice drift mechanically                               | 0.1        | hermes          | Remove `.vale.ini`, `styles/`       |
 | 0.4 | GitHub Actions workflow (build + lint + artifact upload) | CI gate enforces buildability                                  | 0.2, 0.3   | hermes          | Delete `.github/workflows/book.yml` |
 | 0.5 | Pre-commit hooks (secrets, trailing whitespace, lint) | CODING_STANDARDS §8 + §9                                       | 0.3        | hermes          | Remove `.pre-commit-config.yaml`    |
@@ -75,7 +76,7 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 | 1.1 | Voice guide with before/after examples | Voice is the highest-risk consistency vector            | 0.6        | claude-code     | Revert `bible/VOICE.md`   |
 | 1.2 | Chapter template + frontmatter schema | Mechanical consistency across 30 chapters                | 0.1        | hermes          | Revert template files     |
 | 1.3 | Scenario grounding rubric            | Enforces non-negotiable #2                                | 1.2        | claude-code     | Revert rubric             |
-| 1.4 | Source-vetting rubric + tier list    | Enforces non-negotiable #3 & #5                           | 1.2        | claude-code     | Revert rubric             |
+| 1.4 | Source-vetting rubric + tier list `needs-adr: true` → ADR-002 | Enforces non-negotiable #3 & #5                           | 1.2        | claude-code     | Revert rubric             |
 | 1.5 | Field-notes definition + worked examples | Prevents "advice" drifting into vague exhortation     | 1.2        | claude-code     | Revert doc                |
 | 1.6 | Style guide (Chicago + project deltas) | Saves 30× rework downstream                             | 1.2        | hermes          | Revert doc                |
 
@@ -99,7 +100,7 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 | 2.3 | Draft Part 3 (Predictable Future) chapter list | 5–15yr scenarios from policy literature | 1.6        | claude-code     | Revert TOC entry |
 | 2.4 | Draft Part 4 (Unknown) chapter list  | Speculative end of gradient                  | 1.6        | claude-code     | Revert TOC entry |
 | 2.5 | Draft Part 5 (Playbook) chapter list | Synthesises Parts 1–4                        | 2.1–2.4    | claude-code     | Revert TOC entry |
-| 2.6 | Cross-Part overlap + gradient audit  | Catches duplication and tone drift           | 2.1–2.5    | claude-code     | Re-cut TOC       |
+| 2.6 | Cross-Part overlap + gradient audit `needs-adr: true` → ADR-003 (TOC lock) | Catches duplication and tone drift; this gate permanently locks the TOC | 2.1–2.5    | claude-code     | Re-cut TOC before Phase 3 opens; after Phase 3 starts, scope change requires Orchestrator + human approval |
 
 ### Phase 3 — Per-chapter research dossiers
 
@@ -113,8 +114,10 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 
 **Tasks:**
 
+**Research methodology** `needs-adr: true` → ADR-004. Orchestrator must publish and CTO must approve `docs/adr/ADR-004-research-methodology.md` before any dossier task opens.
+
 30 dossier tasks, one per chapter (`3.1`–`3.30`), each:
-- Depends on: 2.6 + the corresponding TOC entry.
+- Depends on: 2.6 + ADR-004 approved + the corresponding TOC entry.
 - Suggested model: research-heavy → `claude-code` (Opus) for Parts 1, 4, 5; `hermes` (gpt-5-codex) for Parts 2, 3 (more incident/news-driven).
 - Rollback: revert the chapter directory.
 
@@ -207,8 +210,32 @@ Parallelisation: up to 6 dossiers in flight at once (one per Part).
 - **Scenario grounding fails for speculative Part 4 chapters** (the real incident may not exist for a not-yet-happened scenario). → Resolution path: `SCENARIO_GROUNDING.md` must explicitly define an "extrapolation" rule for Part 4 — scenario must extrapolate from a cited real incident or a cited expert prediction; pure invention remains disallowed. CTO approves the rule in Phase 1.
 - **Agency-vs-human handoff on prose (Phase 5).** → Mitigation: agency owns nothing in Phase 5 except CI; explicit issue templates differentiate "dossier issue" from "prose issue" to keep ownership unambiguous.
 - **Budget overrun on 30 research-heavy dossiers.** → Mitigation: hard cap dossier word count (4k); after the first 3 dossiers, Orchestrator measures actual tokens/dossier and re-projects against the $400 cap; escalate at 80%.
-- **Skill discovery incomplete.** The Architect could not list `Max_Agency/skills/` (WebFetch 403 on the GitHub contents API for that repo). Resolution path: CTO to either grant the Architect a token-authenticated route to that directory or paste the relevant skills inline during plan review; PLAN.md to be revised if any loaded skill changes a structural decision.
 - **Prepper-audience framing vs. broader appeal.** The brief picks prepper/survival as the primary audience but lists Source DNA (Harari, Tegmark, Ord) that skews tech-policy. → Mitigation: `VOICE.md` codifies "practical-first language, intellectually serious substance"; CTO to validate the calibration on the first completed dossier.
+
+## Assumption ledger
+
+Defaults I chose where the human didn't specify. **Ordered riskiest first.** Every item here is one the plan depends on — if wrong, it causes rework.
+
+| Domain | Default | Why I chose it | Rework cost if wrong |
+|---|---|---|---|
+| **Toolchain — PDF engine** | xelatex (via Pandoc `--pdf-engine=xelatex`) | Best Unicode and font support; standard for complex documents | HIGH — switching engines mid-project requires retesting the template and all built artifacts |
+| **TOC count** | Exactly 6 chapters per Part (30 total) | Human said "~6 chapters"; I locked to exactly 6 for mechanical consistency | MEDIUM — TOC drives all of Phase 3; adjusting to 5 or 7 per Part after Phase 2 requires re-scoping 30→25 or 35 dossier tasks |
+| **Phase sequencing** | Phases 0–2 fully sequential before Phase 3 opens | Ensures the bible and TOC are stable before research begins | MEDIUM — alternative is parallel; saves ~1–2 weeks but risks rework if TOC changes mid-dossier |
+| **Citation style** | Chicago Manual of Style (numbered endnotes) | Most common in trade nonfiction; prepper audience is familiar | LOW — style can be changed uniformly at Phase 7 build time via Pandoc CSL |
+| **Prose linter** | Vale + proselint | Open-source, CI-friendly, configurable; best combo for voice enforcement | LOW — alternatives exist (LanguageTool API); swap is a one-file config change |
+| **CI provider** | GitHub Actions | Repo is on GitHub; no external CI needed | LOW — easily swapped to a separate CI provider with one workflow file change |
+| **Source archival** | Wayback Machine for URL rot mitigation | Free, widely trusted, no API key needed | LOW — additive; not removing it just means some sources may rot unarchived |
+
+## Board-criteria flags (ADR stubs required)
+
+Tasks marked `needs-adr: true` because they touch architecture, dependency choice, or irreversible/large-blast-radius decisions:
+
+- **Task 0.2** `needs-adr: true` — Pandoc + xelatex toolchain selection. Stub: `docs/adr/ADR-001-pandoc-pdf-engine.md`
+- **Task 1.4** `needs-adr: true` — Source-vetting rubric and tier list. Defines what counts as acceptable evidence for the whole book; hard to change retroactively. Stub: `docs/adr/ADR-002-source-tier-rubric.md`
+- **Task 2.6** `needs-adr: true` — TOC lock. After this gate Phase 3 research is commissioned; un-locking the TOC collapses all 30 dossier tasks. Stub: `docs/adr/ADR-003-toc-lock.md`
+- **Phase 3 methodology** `needs-adr: true` — Research dossier methodology (what agents search, what sources they can cite, how they handle paywalled sources). Drives the quality of all 30 dossiers. Stub: `docs/adr/ADR-004-research-methodology.md`
+
+ADR stubs will be committed as part of Phase 0 (task 0.1) alongside the directory skeleton.
 
 ## Out of scope
 
