@@ -1,0 +1,27 @@
+# Pandoc defaults for Surviving the AI World
+# See: https://pandoc.org/MANUAL.html#defaults-files
+
+from: markdown+yaml_metadata_block+footnotes+pipe_tables+raw_tex
+standalone: true
+toc: true
+toc-depth: 2
+
+metadata:
+  title: "Surviving the AI World"
+  subtitle: "A field manual for the disruption ahead"
+  author: "TBD"
+  lang: en-US
+  date: ""
+  rights: "All rights reserved."
+
+# PDF-specific (ignored by EPUB writer)
+variables:
+  documentclass: book
+  papersize: a5
+  fontsize: 11pt
+  linkcolor: black
+  urlcolor: black
+  mainfont: "DejaVu Serif"
+  monofont: "DejaVu Sans Mono"
+  geometry:
+    - margin=2cm
