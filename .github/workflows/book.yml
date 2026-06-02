@@ -1,0 +1,61 @@
+name: book
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: lint + build (pdf, epub)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc and XeLaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-xetex \
+            texlive-fonts-recommended \
+            texlive-latex-recommended \
+            fonts-dejavu \
+            make
+
+      - name: Install Vale
+        run: |
+          VALE_VERSION=3.7.1
+          curl -sSL -o /tmp/vale.tar.gz \
+            "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+          sudo tar -xzf /tmp/vale.tar.gz -C /usr/local/bin vale
+          vale --version
+
+      - name: Vale sync (pull third-party styles)
+        run: vale sync
+
+      - name: Lint manuscript with Vale
+        run: vale manuscript/
+
+      - name: Build PDF
+        run: make pdf
+
+      - name: Build EPUB
+        run: make epub
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: surviving-the-ai-world-pdf
+          path: dist/surviving-the-ai-world.pdf
+          if-no-files-found: error
+
+      - name: Upload EPUB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: surviving-the-ai-world-epub
+          path: dist/surviving-the-ai-world.epub
+          if-no-files-found: error
