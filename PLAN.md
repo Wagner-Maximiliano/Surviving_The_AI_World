@@ -31,6 +31,19 @@ Produce *Surviving the AI World*, a ~90,000-word hybrid survival manual structur
 
 Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all work at 100%.
 
+## Model roster
+
+Per `mdp-model-cost-governance`: use the cheapest reliable path that still protects quality.
+
+| Label | Profile / Model | Cost tier | Role in this project |
+|---|---|---|---|
+| `assigned:hermes-coder` | Hermes `coder` profile → `openai/gpt-5-codex` via OpenRouter | Lowest | Bulk mechanical work: all toolchain config, all 30 research dossiers, endnotes stubs, TOC chapter-list drafts, cross-reference passes, citation re-verification, CI/release tasks |
+| `assigned:claude-haiku` | `claude-haiku-4-5` | Low | Lighter writing: README/CONTRIBUTING, field-notes definition + examples, glossary build, marketing one-pager scaffolding |
+| `assigned:claude-sonnet` | `claude-sonnet-4-6` | Medium | Quality layer: voice guide, scenario & source rubrics, cross-Part overlap audit, theme coverage matrix, source gap analysis, field-notes testability audit |
+| `assigned:claude-opus` | `claude-opus-4-7` (Architect / CTO) | Highest | Judgment gates only: ADR authoring, final editorial report, plan revision, CTO sign-offs |
+
+**Rule (per mdp-model-cost-governance §Critical Rule):** Never silently escalate to a higher-cost model. If Hermes-coder fails a task twice, request cross-provider review from `claude-sonnet` before a third attempt. After three failures, escalate to Orchestrator. Do not auto-route to Opus.
+
 ## Phases
 
 ### Phase 0 — Repo & toolchain bootstrap
@@ -44,17 +57,18 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 - [ ] Pre-commit hook rejects committed secrets (per CODING_STANDARDS §8).
 - [ ] `README.md` documents the build, lint, and contribution flow in <1 page.
 - [ ] Empty Part/Chapter directory skeleton exists for all 5 Parts × 6 chapters with placeholder front matter.
+- [ ] Four ADR stub files exist at `docs/adr/ADR-00{1-4}-*.md` (stubs only; bodies filled in their respective tasks).
 
 **Tasks:**
 
-| #   | Title                                   | Why                                                            | Depends on | Suggested model | Rollback                            |
-|-----|-----------------------------------------|----------------------------------------------------------------|------------|-----------------|-------------------------------------|
-| 0.1 | Repo skeleton + directory layout + ADR stubs | Fixed structure unblocks every later task; ADR stubs created here per Board-criteria flags | —          | claude-code     | Delete created dirs; git revert     |
-| 0.2 | Pandoc build config (Makefile + defaults files, xelatex template) `needs-adr: true` → ADR-001 | Reproducible PDF/EPUB build                                    | 0.1        | hermes (gpt-5-codex) | Revert Makefile + `build/`     |
-| 0.3 | Vale styles + proselint config tuned for calm/dry voice | Catches voice drift mechanically                               | 0.1        | hermes          | Remove `.vale.ini`, `styles/`       |
-| 0.4 | GitHub Actions workflow (build + lint + artifact upload) | CI gate enforces buildability                                  | 0.2, 0.3   | hermes          | Delete `.github/workflows/book.yml` |
-| 0.5 | Pre-commit hooks (secrets, trailing whitespace, lint) | CODING_STANDARDS §8 + §9                                       | 0.3        | hermes          | Remove `.pre-commit-config.yaml`    |
-| 0.6 | README + CONTRIBUTING for the manuscript workflow | Humans + agents both need the entry point                      | 0.1–0.5    | claude-code     | Revert docs                         |
+| #   | Title | Why | Depends on | Model | Rollback |
+|-----|-------|-----|------------|-------|----------|
+| 0.1 | Repo skeleton + directory layout + ADR stubs | Fixed structure unblocks every later task; ADR stubs committed now per Board-criteria flags | — | `hermes-coder` | Delete created dirs; `git revert` |
+| 0.2 | Pandoc build config (Makefile + defaults files, xelatex template) `needs-adr: true` → ADR-001 | Reproducible PDF/EPUB build | 0.1 | `hermes-coder` | Revert `Makefile` + `build/` |
+| 0.3 | Vale styles + proselint config tuned for calm/dry voice | Catches voice drift mechanically | 0.1 | `hermes-coder` | Remove `.vale.ini`, `styles/` |
+| 0.4 | GitHub Actions workflow (build + lint + artifact upload) | CI gate enforces buildability | 0.2, 0.3 | `hermes-coder` | Delete `.github/workflows/book.yml` |
+| 0.5 | Pre-commit hooks (secrets, trailing whitespace, lint) | CODING_STANDARDS §8 + §9 | 0.3 | `hermes-coder` | Remove `.pre-commit-config.yaml` |
+| 0.6 | README + CONTRIBUTING for the manuscript workflow | Humans + agents both need the entry point | 0.1–0.5 | `claude-haiku` | Revert docs |
 
 ### Phase 1 — Book bible (the laws of this manuscript)
 
@@ -63,7 +77,7 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 **Acceptance criteria:**
 - [ ] `bible/VOICE.md` defines the calm/dry/confident tone with 6+ before/after examples drawn from the source DNA.
 - [ ] `bible/CHAPTER_TEMPLATE.md` is the canonical chapter skeleton (frontmatter, scenario, knowledge, field notes, further reading, endnotes) with field-by-field rules.
-- [ ] `bible/SCENARIO_GROUNDING.md` defines the rubric for "scenario must cite a real incident" (what counts, what doesn't, minimum sourcing).
+- [ ] `bible/SCENARIO_GROUNDING.md` defines the rubric for "scenario must cite a real incident" (what counts, what doesn't, minimum sourcing) including the Part 4 extrapolation rule.
 - [ ] `bible/SOURCE_RUBRIC.md` defines tiered source quality (Tier 1: peer-reviewed / govt primary; Tier 2: established journalism inc. MIT Tech Review, RAND, FLI; Tier 3: trade nonfiction inc. the named authors; rejected: anonymous blogs, X threads, AI-generated summaries).
 - [ ] `bible/FIELD_NOTES.md` defines what a "tangible action" is (testable in <1 week by an individual or small group) with 5 worked examples per Part.
 - [ ] `bible/STYLE.md` reconciles Chicago Manual conventions with the project's specifics (numbers, units, dates, acronyms, name conventions for the prepper audience).
@@ -71,14 +85,14 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 
 **Tasks:**
 
-| #   | Title                                | Why                                                       | Depends on | Suggested model | Rollback                  |
-|-----|--------------------------------------|-----------------------------------------------------------|------------|-----------------|---------------------------|
-| 1.1 | Voice guide with before/after examples | Voice is the highest-risk consistency vector            | 0.6        | claude-code     | Revert `bible/VOICE.md`   |
-| 1.2 | Chapter template + frontmatter schema | Mechanical consistency across 30 chapters                | 0.1        | hermes          | Revert template files     |
-| 1.3 | Scenario grounding rubric            | Enforces non-negotiable #2                                | 1.2        | claude-code     | Revert rubric             |
-| 1.4 | Source-vetting rubric + tier list `needs-adr: true` → ADR-002 | Enforces non-negotiable #3 & #5                           | 1.2        | claude-code     | Revert rubric             |
-| 1.5 | Field-notes definition + worked examples | Prevents "advice" drifting into vague exhortation     | 1.2        | claude-code     | Revert doc                |
-| 1.6 | Style guide (Chicago + project deltas) | Saves 30× rework downstream                             | 1.2        | hermes          | Revert doc                |
+| #   | Title | Why | Depends on | Model | Rollback |
+|-----|-------|-----|------------|-------|----------|
+| 1.1 | Voice guide with before/after examples | Voice is the highest-risk consistency vector; needs judgment to get right | 0.6 | `claude-sonnet` | Revert `bible/VOICE.md` |
+| 1.2 | Chapter template + frontmatter schema | Mechanical consistency across 30 chapters | 0.1 | `hermes-coder` | Revert template files |
+| 1.3 | Scenario grounding rubric (inc. Part 4 extrapolation rule) | Enforces non-negotiable #2; Part 4 edge case needs careful judgment | 1.2 | `claude-sonnet` | Revert rubric |
+| 1.4 | Source-vetting rubric + tier list `needs-adr: true` → ADR-002 | Enforces non-negotiables #3 & #5; judgment-heavy; hard to change retroactively | 1.2 | `claude-sonnet` | Revert rubric |
+| 1.5 | Field-notes definition + worked examples | Prevents "advice" drifting into vague exhortation | 1.2 | `claude-haiku` | Revert doc |
+| 1.6 | Style guide (Chicago + project deltas) | Saves 30× rework downstream; mostly mechanical | 1.2 | `hermes-coder` | Revert doc |
 
 ### Phase 2 — Table of contents lock
 
@@ -93,14 +107,14 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 
 **Tasks:**
 
-| #   | Title                                | Why                                          | Depends on | Suggested model | Rollback         |
-|-----|--------------------------------------|----------------------------------------------|------------|-----------------|------------------|
-| 2.1 | Draft Part 1 (Baseline) chapter list | Anchors the practical end of the gradient    | 1.6        | claude-code     | Revert TOC entry |
-| 2.2 | Draft Part 2 (Disruption) chapter list | Grounded in current incidents              | 1.6        | claude-code     | Revert TOC entry |
-| 2.3 | Draft Part 3 (Predictable Future) chapter list | 5–15yr scenarios from policy literature | 1.6        | claude-code     | Revert TOC entry |
-| 2.4 | Draft Part 4 (Unknown) chapter list  | Speculative end of gradient                  | 1.6        | claude-code     | Revert TOC entry |
-| 2.5 | Draft Part 5 (Playbook) chapter list | Synthesises Parts 1–4                        | 2.1–2.4    | claude-code     | Revert TOC entry |
-| 2.6 | Cross-Part overlap + gradient audit `needs-adr: true` → ADR-003 (TOC lock) | Catches duplication and tone drift; this gate permanently locks the TOC | 2.1–2.5    | claude-code     | Re-cut TOC before Phase 3 opens; after Phase 3 starts, scope change requires Orchestrator + human approval |
+| #   | Title | Why | Depends on | Model | Rollback |
+|-----|-------|-----|------------|-------|----------|
+| 2.1 | Draft Part 1 (Baseline) 6-chapter list | Anchors the practical end of the gradient | 1.6 | `hermes-coder` | Revert TOC entry |
+| 2.2 | Draft Part 2 (Disruption) 6-chapter list | Grounded in current incidents | 1.6 | `hermes-coder` | Revert TOC entry |
+| 2.3 | Draft Part 3 (Predictable Future) 6-chapter list | 5–15yr scenarios from policy literature | 1.6 | `hermes-coder` | Revert TOC entry |
+| 2.4 | Draft Part 4 (Unknown) 6-chapter list | Speculative end of gradient | 1.6 | `hermes-coder` | Revert TOC entry |
+| 2.5 | Draft Part 5 (Playbook) 6-chapter list | Synthesises Parts 1–4 | 2.1–2.4 | `hermes-coder` | Revert TOC entry |
+| 2.6 | Cross-Part overlap + gradient audit `needs-adr: true` → ADR-003 (TOC lock) | Catches duplication and tone drift; permanently locks the TOC | 2.1–2.5 | `claude-sonnet` | Re-cut TOC before Phase 3 opens; after Phase 3 starts, scope change requires Orchestrator + human approval |
 
 ### Phase 3 — Per-chapter research dossiers
 
@@ -109,7 +123,7 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 **Acceptance criteria (per chapter):**
 - [ ] `manuscript/<part>/<chapter>/dossier.md` exists with: scenario seed (≥2 candidate real incidents, each with 2+ Tier-1/2 sources), 8–15 key claims (each with ≥1 Tier-1/2 citation), 5–10 candidate field-notes actions, 3–5 further-reading pointers from the source DNA.
 - [ ] `manuscript/<part>/<chapter>/endnotes.md` initialised with the citation list referenced from `dossier.md`.
-- [ ] All sources pass `SOURCE_RUBRIC.md`. CTO spot-checks 1-in-5 dossiers.
+- [ ] All sources pass `SOURCE_RUBRIC.md`. Sonnet spot-checks 1-in-5 dossiers for source quality and voice fit.
 - [ ] No dossier exceeds 4,000 words of agent prose (this is scaffolding, not draft).
 
 **Tasks:**
@@ -117,11 +131,12 @@ Triggers per Highlevel_Plan_V2.0: warn human at 80% of either cap; pause all wor
 **Research methodology** `needs-adr: true` → ADR-004. Orchestrator must publish and CTO must approve `docs/adr/ADR-004-research-methodology.md` before any dossier task opens.
 
 30 dossier tasks, one per chapter (`3.1`–`3.30`), each:
+- **Primary model:** `hermes-coder` for all 30 chapters. Hermes Developer does the bulk research writing.
+- **Spot-check model:** `claude-sonnet` reviews 1-in-5 dossiers (tasks 3.5, 3.10, 3.15, 3.20, 3.25, 3.30) against `SOURCE_RUBRIC.md` and `VOICE.md` before sign-off.
 - Depends on: 2.6 + ADR-004 approved + the corresponding TOC entry.
-- Suggested model: research-heavy → `claude-code` (Opus) for Parts 1, 4, 5; `hermes` (gpt-5-codex) for Parts 2, 3 (more incident/news-driven).
 - Rollback: revert the chapter directory.
 
-Parallelisation: up to 6 dossiers in flight at once (one per Part).
+Parallelisation: up to 6 `hermes-coder` dossier tasks in flight concurrently (one per Part), each in its own worktree per AMA §3.
 
 ### Phase 4 — Scaffolding integration & cross-chapter coherence
 
@@ -135,12 +150,12 @@ Parallelisation: up to 6 dossiers in flight at once (one per Part).
 
 **Tasks:**
 
-| #   | Title                                | Why                                                  | Depends on | Suggested model | Rollback           |
-|-----|--------------------------------------|------------------------------------------------------|------------|-----------------|--------------------|
-| 4.1 | Theme coverage matrix                | Recurring themes are a brief requirement             | Phase 3    | claude-code     | Revert THEMES.md   |
-| 4.2 | Cross-reference pass                 | Turns essays into a book                             | 4.1        | hermes          | Revert CROSSREF.md |
-| 4.3 | Glossary build                       | Terminology consistency                              | Phase 3    | hermes          | Revert GLOSSARY.md |
-| 4.4 | Source overlap & gap analysis        | Detects over-reliance or missing Source DNA          | Phase 3    | claude-code     | Revert report      |
+| #   | Title | Why | Depends on | Model | Rollback |
+|-----|-------|-----|------------|-------|----------|
+| 4.1 | Theme coverage matrix | Recurring themes are a brief requirement; needs synthesis judgment | Phase 3 | `claude-sonnet` | Revert `bible/THEMES.md` |
+| 4.2 | Cross-reference pass | Turns 30 essays into a book; mechanical cross-linking | 4.1 | `hermes-coder` | Revert `manuscript/CROSSREF.md` |
+| 4.3 | Glossary build | Terminology consistency; mechanical extraction from dossiers | Phase 3 | `claude-haiku` | Revert `bible/GLOSSARY.md` |
+| 4.4 | Source overlap & gap analysis | Detects over-reliance or missing Source DNA; judgment on what "over-reliance" means | Phase 3 | `claude-sonnet` | Revert report |
 
 ### Phase 5 — Human prose pass (gate, not agency work)
 
@@ -151,7 +166,7 @@ Parallelisation: up to 6 dossiers in flight at once (one per Part).
 - [ ] Vale + proselint pass at configured severity.
 - [ ] Every endnote referenced in a chapter resolves to an entry in `endnotes.md`.
 
-**Tasks:** human-owned. Agency tasks here are limited to keeping CI green and surfacing lint/build regressions.
+**Tasks:** Human-owned. Agency tasks here are limited to keeping CI green and surfacing lint/build regressions (`hermes-coder` handles CI triage; any regression that requires judgement about whether it reflects voice or content drift goes to `claude-sonnet`).
 
 ### Phase 6 — Editorial pass on completed prose
 
@@ -166,12 +181,12 @@ Parallelisation: up to 6 dossiers in flight at once (one per Part).
 
 **Tasks:**
 
-| #   | Title                                  | Why                                  | Depends on | Suggested model | Rollback             |
-|-----|----------------------------------------|--------------------------------------|------------|-----------------|----------------------|
-| 6.1 | Citation re-verification (per chapter, 30 tasks) | Sources rot; the book ships current | Phase 5   | hermes          | n/a (read-only; produces issues) |
-| 6.2 | Cross-reference & glossary audit       | Catches drift introduced in prose    | Phase 5    | hermes          | n/a (issues only)    |
-| 6.3 | Field-notes testability audit          | Enforces non-negotiable #4 in prose  | Phase 5    | claude-code     | n/a (issues only)    |
-| 6.4 | Final editorial report                 | One artifact for CTO sign-off        | 6.1–6.3    | claude-code     | Revert report file   |
+| #   | Title | Why | Depends on | Model | Rollback |
+|-----|-------|-----|------------|-------|----------|
+| 6.1 | Citation re-verification (30 tasks, one per chapter) | Sources rot; the book must ship current | Phase 5 | `hermes-coder` | n/a — read-only; produces issues |
+| 6.2 | Cross-reference & glossary audit | Catches drift introduced in human prose; mechanical | Phase 5 | `hermes-coder` | n/a — issues only |
+| 6.3 | Field-notes testability audit | Enforces non-negotiable #4 in prose; needs judgment about what "testable in <1 week" means | Phase 5 | `claude-sonnet` | n/a — issues only |
+| 6.4 | Final editorial report | One artifact for CTO sign-off; highest-judgment synthesis | 6.1–6.3 | `claude-opus` | Revert report file |
 
 ### Phase 7 — Final build & shipping artifacts
 
@@ -186,31 +201,31 @@ Parallelisation: up to 6 dossiers in flight at once (one per Part).
 
 **Tasks:**
 
-| #   | Title                                | Why                          | Depends on | Suggested model | Rollback                |
-|-----|--------------------------------------|------------------------------|------------|-----------------|-------------------------|
-| 7.1 | Sample-chapter build target          | Marketing needs a vertical slice | Phase 6 | hermes          | Revert Makefile target  |
-| 7.2 | Marketing one-pager scaffolding      | Agency-produced scaffolding, human edits | Phase 6 | claude-code | Revert file         |
-| 7.3 | Cover placeholder + EPUB metadata    | EPUB needs both to validate  | Phase 6    | hermes          | Revert epub config      |
-| 7.4 | Tagged release + artifact upload     | Single shippable deliverable | 7.1–7.3    | hermes          | Delete tag + release    |
+| #   | Title | Why | Depends on | Model | Rollback |
+|-----|-------|-----|------------|-------|----------|
+| 7.1 | Sample-chapter build target | Marketing needs a vertical slice; Makefile config | Phase 6 | `hermes-coder` | Revert Makefile target |
+| 7.2 | Marketing one-pager scaffolding | Agency-produced scaffolding, human edits; writing task | Phase 6 | `claude-haiku` | Revert file |
+| 7.3 | Cover placeholder + EPUB metadata | EPUB needs both to validate; config task | Phase 6 | `hermes-coder` | Revert epub config |
+| 7.4 | Tagged release + artifact upload | Single shippable deliverable | 7.1–7.3 | `hermes-coder` | Delete tag + release |
 
 ## Parallelisation map
 
 - Phase 0: 0.2 ∥ 0.3 (different config domains); 0.4 depends on both.
 - Phase 1: 1.1 ∥ 1.3 ∥ 1.4 ∥ 1.5 ∥ 1.6 (independent docs); 1.2 first as it defines fields the others reference.
 - Phase 2: 2.1 ∥ 2.2 ∥ 2.3 ∥ 2.4 (independent Parts); 2.5 last; 2.6 depends on all.
-- Phase 3: up to 6 dossier tasks in flight concurrently — one per Part — using different worktrees per AMA §3. Cap at 6 to keep CTO spot-checks tractable and stay under per-window budget.
-- Phase 4: 4.1, 4.3 ∥ each other; 4.2 depends on 4.1; 4.4 ∥ 4.1 once Phase 3 is closed.
+- Phase 3: up to 6 `hermes-coder` dossier tasks in flight concurrently — one per Part — each in its own worktree per AMA §3. Sonnet spot-checks are sequential after each batch of 5.
+- Phase 4: 4.1 ∥ 4.3 (independent); 4.2 depends on 4.1; 4.4 ∥ 4.1 once Phase 3 closes.
 - Phase 6: 6.1 ∥ 6.2 ∥ 6.3; 6.4 last.
-- Phase 7: 7.1, 7.2, 7.3 ∥ each other; 7.4 last.
+- Phase 7: 7.1 ∥ 7.2 ∥ 7.3; 7.4 last.
 
 ## Risks and unknowns
 
-- **Voice drift across 30 chapters.** → Mitigation: Phase 1 `VOICE.md` with before/after examples; Vale custom style enforcing banned phrasings; CTO spot-checks 1-in-5 dossiers in Phase 3 for voice as well as content.
+- **Voice drift across 30 chapters.** → Mitigation: Phase 1 `VOICE.md` with before/after examples; Vale custom style enforcing banned phrasings; Sonnet spot-checks 1-in-5 dossiers in Phase 3 for voice fit as well as source quality.
 - **Source rot during the project lifecycle.** → Mitigation: archive every cited URL to the Wayback Machine at dossier-time; store archive URLs alongside live URLs in endnotes. Phase 6 re-verification catches mid-flight drift.
-- **Scenario grounding fails for speculative Part 4 chapters** (the real incident may not exist for a not-yet-happened scenario). → Resolution path: `SCENARIO_GROUNDING.md` must explicitly define an "extrapolation" rule for Part 4 — scenario must extrapolate from a cited real incident or a cited expert prediction; pure invention remains disallowed. CTO approves the rule in Phase 1.
+- **Scenario grounding fails for speculative Part 4 chapters.** → Resolution path: `SCENARIO_GROUNDING.md` (task 1.3, owned by Sonnet) must define an extrapolation rule — scenario must extrapolate from a cited real incident or cited expert prediction; pure invention remains disallowed. CTO approves the rule in Phase 1.
 - **Agency-vs-human handoff on prose (Phase 5).** → Mitigation: agency owns nothing in Phase 5 except CI; explicit issue templates differentiate "dossier issue" from "prose issue" to keep ownership unambiguous.
-- **Budget overrun on 30 research-heavy dossiers.** → Mitigation: hard cap dossier word count (4k); after the first 3 dossiers, Orchestrator measures actual tokens/dossier and re-projects against the $400 cap; escalate at 80%.
-- **Prepper-audience framing vs. broader appeal.** The brief picks prepper/survival as the primary audience but lists Source DNA (Harari, Tegmark, Ord) that skews tech-policy. → Mitigation: `VOICE.md` codifies "practical-first language, intellectually serious substance"; CTO to validate the calibration on the first completed dossier.
+- **Budget overrun on 30 research-heavy dossiers.** → Mitigation: hard cap dossier word count (4k); after the first 3 dossiers, Orchestrator measures actual tokens/dossier and re-projects against the $400 cap; escalate at 80%. Hermes-coder being the bulk model keeps cost low.
+- **Prepper-audience framing vs. Source DNA tone.** The brief picks prepper/survival as the primary audience but lists Source DNA (Harari, Tegmark, Ord) that skews tech-policy. → Mitigation: `VOICE.md` (Sonnet-authored) codifies "practical-first language, intellectually serious substance"; Sonnet validates calibration on the first completed dossier before Phase 3 continues.
 
 ## Assumption ledger
 
