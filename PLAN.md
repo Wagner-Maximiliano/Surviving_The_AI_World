@@ -115,6 +115,7 @@ Per `mdp-model-cost-governance`: use the cheapest reliable path that still prote
 | 2.4 | Draft Part 4 (Unknown) 6-chapter list | Speculative end of gradient | 1.6 | `hermes-coder` | Revert TOC entry |
 | 2.5 | Draft Part 5 (Playbook) 6-chapter list | Synthesises Parts 1–4 | 2.1–2.4 | `hermes-coder` | Revert TOC entry |
 | 2.6 | Cross-Part overlap + gradient audit `needs-adr: true` → ADR-003 (TOC lock) | Catches duplication and tone drift; permanently locks the TOC | 2.1–2.5 | `claude-sonnet` | Re-cut TOC before Phase 3 opens; after Phase 3 starts, scope change requires Orchestrator + human approval |
+| 2.7 | Author ADR-004 body (research dossier methodology) `needs-adr: true` → ADR-004 | Phase 3 cannot open without CTO-approved methodology; no task previously owned writing it | 2.6 | `claude-sonnet` | Revert ADR-004 body to stub; Phase 3 stays closed |
 
 ### Phase 3 — Per-chapter research dossiers
 
@@ -123,17 +124,18 @@ Per `mdp-model-cost-governance`: use the cheapest reliable path that still prote
 **Acceptance criteria (per chapter):**
 - [ ] `manuscript/<part>/<chapter>/dossier.md` exists with: scenario seed (≥2 candidate real incidents, each with 2+ Tier-1/2 sources), 8–15 key claims (each with ≥1 Tier-1/2 citation), 5–10 candidate field-notes actions, 3–5 further-reading pointers from the source DNA.
 - [ ] `manuscript/<part>/<chapter>/endnotes.md` initialised with the citation list referenced from `dossier.md`.
-- [ ] All sources pass `SOURCE_RUBRIC.md`. Sonnet spot-checks 1-in-5 dossiers for source quality and voice fit.
+- [ ] All sources pass `SOURCE_RUBRIC.md`. Sonnet spot-checks 1-in-5 dossiers for source quality, voice fit, and absence of body prose.
 - [ ] No dossier exceeds 4,000 words of agent prose (this is scaffolding, not draft).
+- [ ] `dossier.md` contains **no chapter-body prose** — no narrative paragraphs beyond the structured seed/claim/field-notes/further-reading format defined in `bible/CHAPTER_TEMPLATE.md`. Sonnet spot-check explicitly verifies this for the 1-in-5 dossiers; Hermes-coder self-checks against the template before marking done.
 
 **Tasks:**
 
-**Research methodology** `needs-adr: true` → ADR-004. Orchestrator must publish and CTO must approve `docs/adr/ADR-004-research-methodology.md` before any dossier task opens.
+**Gate:** ADR-004 body must be merged (task 2.7) and CTO sign-off recorded before task 3.1 can be assigned. Orchestrator enforces this via the `blocked` label on all Phase 3 issues until the ADR-004 PR is merged.
 
 30 dossier tasks, one per chapter (`3.1`–`3.30`), each:
 - **Primary model:** `hermes-coder` for all 30 chapters. Hermes Developer does the bulk research writing.
-- **Spot-check model:** `claude-sonnet` reviews 1-in-5 dossiers (tasks 3.5, 3.10, 3.15, 3.20, 3.25, 3.30) against `SOURCE_RUBRIC.md` and `VOICE.md` before sign-off.
-- Depends on: 2.6 + ADR-004 approved + the corresponding TOC entry.
+- **Spot-check model:** `claude-sonnet` reviews 1-in-5 dossiers (tasks 3.5, 3.10, 3.15, 3.20, 3.25, 3.30) against `SOURCE_RUBRIC.md`, `VOICE.md`, and the no-body-prose AC.
+- Depends on: 2.7 merged + CTO sign-off on ADR-004 + the corresponding TOC entry.
 - Rollback: revert the chapter directory.
 
 Parallelisation: up to 6 `hermes-coder` dossier tasks in flight concurrently (one per Part), each in its own worktree per AMA §3.
@@ -173,11 +175,12 @@ Parallelisation: up to 6 `hermes-coder` dossier tasks in flight concurrently (on
 **Goal:** Agents fact-check, citation-verify, and consistency-check the human's prose without rewriting it.
 
 **Acceptance criteria:**
-- [ ] Every claim with a citation: agent re-verifies the source still says what the endnote says it does. Mismatches filed as issues, not edits.
-- [ ] Cross-reference resolution: every `see Ch. X` actually points at the intended content.
-- [ ] Glossary adherence: terms used per `GLOSSARY.md` definitions; deviations flagged as issues.
-- [ ] Field-notes audit: every field-notes box passes the "testable in <1 week" rubric, or an issue is filed.
-- [ ] CTO sign-off on editorial report before Phase 7 opens.
+- [ ] Every claim with a citation re-verified; all mismatches filed as issues (not edits).
+- [ ] Every `see Ch. X` cross-reference resolves to the intended content.
+- [ ] All terms in ≥3 chapters match their `GLOSSARY.md` definitions; deviations filed as issues.
+- [ ] Every field-notes box audited against the "testable in <1 week" rubric; failures filed as issues.
+- [ ] `docs/editorial-report.md` committed, summarising all filed issues grouped by chapter.
+- [ ] CTO sign-off on `docs/editorial-report.md` before Phase 7 opens.
 
 **Tasks:**
 
@@ -193,11 +196,12 @@ Parallelisation: up to 6 `hermes-coder` dossier tasks in flight concurrently (on
 **Goal:** Produce the deliverables a publisher or self-publishing pipeline needs.
 
 **Acceptance criteria:**
-- [ ] `dist/surviving-the-ai-world.pdf` and `.epub` build clean from CI on a tagged release.
-- [ ] `dist/sample-chapter.pdf` (one chapter, marketing-ready) builds from a separate Pandoc target.
-- [ ] `dist/marketing-onepager.md` exists (positioning, audience, comp titles, TOC, sample paragraph), human-reviewed.
-- [ ] Cover placeholder (text-only, design TBD by human) included in the EPUB.
-- [ ] Tagged GitHub release contains all four artifacts.
+- [ ] `make pdf` and `make epub` build from the final human-authored prose without errors; CI green on the release tag.
+- [ ] `dist/surviving-the-ai-world.pdf` and `dist/surviving-the-ai-world.epub` present in the tagged release artifacts.
+- [ ] `dist/sample-chapter.pdf` present in the tagged release artifacts.
+- [ ] `dist/marketing-onepager.md` committed and human-reviewed (comment on the PR confirming review).
+- [ ] Cover placeholder (text-only) embedded in EPUB; EPUB validates with `epubcheck`.
+- [ ] Tagged GitHub release exists with all four artifacts attached and release notes listing Part/chapter count.
 
 **Tasks:**
 
@@ -212,8 +216,8 @@ Parallelisation: up to 6 `hermes-coder` dossier tasks in flight concurrently (on
 
 - Phase 0: 0.2 ∥ 0.3 (different config domains); 0.4 depends on both.
 - Phase 1: 1.1 ∥ 1.3 ∥ 1.4 ∥ 1.5 ∥ 1.6 (independent docs); 1.2 first as it defines fields the others reference.
-- Phase 2: 2.1 ∥ 2.2 ∥ 2.3 ∥ 2.4 (independent Parts); 2.5 last; 2.6 depends on all.
-- Phase 3: up to 6 `hermes-coder` dossier tasks in flight concurrently — one per Part — each in its own worktree per AMA §3. Sonnet spot-checks are sequential after each batch of 5.
+- Phase 2: 2.1 ∥ 2.2 ∥ 2.3 ∥ 2.4 (independent Parts); 2.5 last; 2.6 depends on all; 2.7 depends on 2.6 (sequential — ADR-004 body gates Phase 3).
+- Phase 3: up to 6 `hermes-coder` dossier tasks in flight concurrently — one per Part — each in its own worktree per AMA §3. All blocked until task 2.7 is merged and CTO sign-off recorded. Sonnet spot-checks are sequential after each batch of 5.
 - Phase 4: 4.1 ∥ 4.3 (independent); 4.2 depends on 4.1; 4.4 ∥ 4.1 once Phase 3 closes.
 - Phase 6: 6.1 ∥ 6.2 ∥ 6.3; 6.4 last.
 - Phase 7: 7.1 ∥ 7.2 ∥ 7.3; 7.4 last.
