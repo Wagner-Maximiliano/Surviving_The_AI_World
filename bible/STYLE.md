@@ -41,12 +41,23 @@ This file pairs with `bible/VOICE.md` (register and rhetoric, which Chicago does
 - **AI capitalisation:** `AI`, not `ai` or `A.I.`. Specific systems take their branded capitalisation: `GPT-5`, `Claude`, `Gemini`, `Llama 4`, `DeepSeek`, `o3`. Treat product names as proper nouns; do not pluralise with apostrophes (`three GPTs`, not `three GPT's`).
 - **Initialisms vs. acronyms:** Chicago default — both written without periods (`NIST`, `FBI`, `CISA`). Article choice follows pronunciation: `an FBI alert`, `a NIST publication`.
 
-## 5. Person references
+## 5. Names and references
+
+### People
 
 - **First mention:** named expert with affiliation. `Stuart Russell, UC Berkeley`. `Toby Ord, Oxford`. `Karen Hao, journalist (formerly MIT Technology Review)`.
 - **Subsequent mentions** within the same chapter: surname only. `Russell argues …`.
 - **Honorifics:** omit except where required for disambiguation or where the source uses them prominently. No `Dr.` / `Prof.` by default. Government and military titles retained on first use where they bear on authority (`Vice Admiral`, `Senator`).
 - **Pseudonyms** (used only when legally required per `bible/SCENARIO_GROUNDING.md`): italicised on first use, footnoted, plain thereafter.
+
+### Institutions, agencies, and systems
+
+- **Agencies and institutions:** spell out on first use unless covered by the standing acronym exceptions in §4. `Federal Emergency Management Agency (FEMA)`, `National Institute of Standards and Technology (NIST)`, `Internet Crime Complaint Center (IC3)`.
+- **Subsequent mentions:** use the shortest unambiguous form. `FEMA`, `NIST`, `IC3`, `the FTC`, `the lab` only when the referent is obvious within the chapter.
+- **Military and government bodies:** use the formal name on first mention when authority matters. `US Army Corps of Engineers`, `UK Cabinet Office`. After that, shorten naturally: `the Corps`, `the Cabinet Office`.
+- **Companies and labs:** use the public-facing name and current styling. `OpenAI`, `Anthropic`, `Google DeepMind`, `xAI`, `Meta`. Do not editorialise with scare quotes or nicknames.
+- **Product and model names:** preserve vendor capitalisation and version punctuation exactly: `ChatGPT`, `GPT-5`, `Claude`, `Gemini`, `Llama 4`, `DeepSeek-R1`. If a model family becomes a common noun in prose, keep the brand form on first use and use a plain-English descriptor after (`the model`, `the assistant`, `the chatbot`) unless contrast between systems matters.
+- **Prepper-audience naming bias:** prefer concrete roles over bureaucratic abstractions. `county emergency manager`, `ham-radio operator`, `utility crew`, `neighbourhood watch lead` beat `relevant stakeholders` or `community actors`.
 
 ## 6. Quotations
 
@@ -121,6 +132,8 @@ This file pairs with `bible/VOICE.md` (register and rhetoric, which Chicago does
 | Acronyms | Spell out + abbrev on first use; thereafter abbrev. Exceptions: `AI`, `US`, `UK`, `EU` |
 | AI capitalisation | `AI`; products per brand (`GPT-5`, `Claude`, `Gemini`) |
 | People | First mention: name + affiliation. After: surname |
+| Institutions / systems | Spell out on first use unless a standing exception; preserve official product/model styling |
+| Prepper naming | Prefer concrete roles (`utility crew`, `county emergency manager`) over abstractions |
 | Quotes | Double for direct, single for nested; American punctuation |
 | Em dash | Unspaced — like this |
 | En dash | Ranges (`2024–2025`) and open compound modifiers (`post–Cold War`) |
