@@ -132,8 +132,3 @@ Synced with `styles/Surviving/banned-phrases.yml` as of 2026-06-02. Vale enforce
 ## 6. Calibration note: prepper audience, intellectually serious substance
 
 The audience is the prepper and practical-survival community. The Source DNA includes Tegmark, Harari, Ord, Suleyman, and RAND — writers who skew tech-policy. The risk is that those sources pull the prose toward seminar-room phrasing the prepper reader will, rightly, reject. The calibration is this: **substance from the policy literature, register from the field manual.** A chapter can cite Bostrom and still sound like it knows how to clear a chimney. It should. When in doubt, prefer the sentence a competent tradesperson would write about something they understand deeply — short, specific, and uninterested in impressing anyone. That sentence carries the policy idea further than the policy idea's native register ever would.
-
-
-## 7. Source DNA calibration map
-
-Each before/after example in Section 4 calibrates against a named source: 4.1 SAS/FM 21-76, 4.2 MIT Tech Review/FLI, 4.3 Tegmark/Harari, 4.4 Ord/Tegmark, 4.5 Ord/Suleyman, 4.6 Whole Earth Catalog/SAS, 4.7 RAND/FM 21-76.
