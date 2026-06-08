@@ -31,8 +31,9 @@ jobs:
       - name: Install Vale
         run: |
           VALE_VERSION=3.7.1
-          curl -sSL -o /tmp/vale.tar.gz \
+          curl -sSL -L --retry 3 --retry-delay 2 -o /tmp/vale.tar.gz \
             "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+          file /tmp/vale.tar.gz
           sudo tar -xzf /tmp/vale.tar.gz -C /usr/local/bin vale
           vale --version
 
