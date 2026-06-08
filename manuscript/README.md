@@ -9,15 +9,15 @@ This directory contains the source manuscript for *Surviving the AI World*, a su
 ```
 manuscript/
   part-1-baseline/         # Part 1: AI Baseline
-    ch-01, ch-02, ... ch-06
+    ch-01, ch-02, … ch-06
   part-2-disruption/       # Part 2: The Disruption Underway
-    ch-01, ch-02, ... ch-06
+    ch-01, ch-02, … ch-06
   part-3-predictable-future/
-    ch-01, ch-02, ... ch-06
+    ch-01, ch-02, … ch-06
   part-4-unknown/          # Part 4: Unknown Long Tail
-    ch-01, ch-02, ... ch-06
+    ch-01, ch-02, … ch-06
   part-5-playbook/         # Part 5: Practical Playbook
-    ch-01, ch-02, ... ch-06
+    ch-01, ch-02, … ch-06
   TOC.md                   # Locked table of contents (Phase 2)
 ```
 
