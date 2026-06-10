@@ -1,0 +1,5 @@
+# Connectivity Test
+
+This file was created by ChatGPT to verify GitHub write access.
+
+It is safe to delete after verification.
