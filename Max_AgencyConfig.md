@@ -14,7 +14,7 @@ Agency itself is never modified. Edit a value, **commit + push**, and the next g
 Edit the values inside this block:
 
 ```ini
-GATE_CODER_MODEL=xiaomi/mimo-v2.5
+GATE_CODER_MODEL=deepseek/deepseek-v4-flash
 GATE_TRIAGE_MODEL=gpt-5.4-mini
 GATE_ARCHITECT_MODEL=opus
 GATE_CTO_MODEL=opus
@@ -36,6 +36,8 @@ GATE_CTO_MODEL=opus
 | `x-ai/grok-4` | all-rounder |
 | `meta-llama/llama-4-maverick` | open-weight |
 | `mistralai/mistral-large-2` | open-weight |
+| `deepseek/deepseek-v4-flash` | open-weight |
+
 
 ### `GATE_TRIAGE_MODEL` -- codex CLI (OpenAI auth)
 
