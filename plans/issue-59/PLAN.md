@@ -1,46 +1,53 @@
 ## Summary
 
-Establish the `manuscript/toc/` directory before issues #52–55 (tasks 2.1–2.5) begin writing into it. Deliver a `README.md` that specifies the directory structure, file-naming convention, and per-chapter schema, plus one stub file per Part so all downstream tasks write into a consistent, agreed target.
+Create `manuscript/toc/` and establish its format so the downstream TOC-population tasks (#52–56, Phase 2 tasks 2.1–2.5) have a consistent, agreed-upon target. The deliverable is a `manuscript/toc/README.md` that documents the directory layout, file naming, and per-chapter entry schema, plus five thin placeholder stub files — one per Part. This task locks the structural decisions; it does not author chapter content.
 
 ## Scope
 
 **In scope**
 - Create the `manuscript/toc/` directory.
-- Author `manuscript/toc/README.md` defining layout, naming, and per-chapter schema.
-- Add one stub file per Part (one per the set of Parts covered by tasks 2.1–2.5).
-- Align the schema with `PLAN.md` Phase 2 acceptance criteria and `bible/CHAPTER_TEMPLATE.md`.
+- Author `manuscript/toc/README.md` specifying naming convention, per-chapter schema, and the schema-precedence rule.
+- Create five thin stub files, one per Part, using the locked naming convention.
 
 **Out of scope**
-- Populating real chapter content (that is tasks 2.1–2.5).
-- Changing `PLAN.md`, `bible/CHAPTER_TEMPLATE.md`, or any tooling that consumes the toc files.
+- Populating the stubs with real chapter entries — that is the job of tasks 2.1–2.5 (#52–56), each of which owns and overwrites its corresponding Part file.
+- Any change to `PLAN.md` or `bible/CHAPTER_TEMPLATE.md`.
+- Full-chapter formatting (governed by `CHAPTER_TEMPLATE.md`, not this TOC).
 
 ## Files to change
 
-- `manuscript/toc/README.md` — new; format specification.
-- `manuscript/toc/part-1.md` (and `part-2.md` … `part-N.md`) — new stub per Part, matching the count/naming implied by tasks 2.1–2.5.
-- `manuscript/toc/` — new directory (implicitly created by the files above).
+| File | Action |
+|------|--------|
+| `manuscript/toc/README.md` | Create — format spec + precedence rule |
+| `manuscript/toc/part1-baseline.md` | Create — thin stub |
+| `manuscript/toc/part2-disruption.md` | Create — thin stub |
+| `manuscript/toc/part3-predictable-future.md` | Create — thin stub |
+| `manuscript/toc/part4-unknown.md` | Create — thin stub |
+| `manuscript/toc/part5-playbook.md` | Create — thin stub |
+
+**Naming convention (locked):** `part<N>-<slug>.md`, exactly 5 files, one per Part. This is not negotiable or "to match conventions" — it follows the convention already established by issue #55, which writes `manuscript/toc/part4-unknown.md`. The five Parts per `PLAN.md` are Baseline, Disruption, Predictable Future, Unknown, and Playbook, yielding exactly the five filenames above.
 
 ## Steps
 
-1. Read `PLAN.md` Phase 2 acceptance criteria to extract required fields, Part count, and any naming/ordering constraints the downstream tasks depend on.
-2. Read `bible/CHAPTER_TEMPLATE.md` and map its fields onto a per-chapter schema; reconcile any divergence from PLAN.md and note which source wins.
-3. Decide the directory layout and file-naming convention (e.g. one file per Part, `part-<n>.md`, zero-padded or not — pick to match existing repo conventions).
-4. Define the per-chapter schema: field list, required vs optional, types/format, ordering, and a worked example entry.
-5. Write `manuscript/toc/README.md` documenting the structure, naming rules, schema, and a copy-paste-able stub template for a chapter.
-6. Create one stub file per Part containing the header/frontmatter and an empty or example chapter entry conforming to the schema.
-7. Cross-check each stub against the README and against the field expectations of tasks 2.1–2.5 so writers have an unambiguous target.
+1. **Create the directory** `manuscript/toc/`.
+
+2. **Write `manuscript/toc/README.md`** documenting:
+   - The naming convention `part<N>-<slug>.md` and the canonical list of 5 files.
+   - The **per-chapter entry schema** (one entry per chapter within each Part file): `title`, `Part`, `ordinal`, a `premise` of ≤120 words, a `knowledge promise` line, and a `source DNA most relied on` line.
+   - The **precedence rule** (permanent): `PLAN.md` Phase 2 acceptance criteria is the authority for the TOC entry schema. `bible/CHAPTER_TEMPLATE.md` governs full chapters authored later, **not** TOC entries. Where the two disagree on per-chapter fields, `PLAN.md` wins for the TOC.
+   - The **stub constraint** (see Acceptance criteria): tasks 2.1–2.5 fill these files in place; stubs must be thin so they can be populated without restructuring.
+
+3. **Create the 5 thin stub files.** Each contains only a header/frontmatter identifying the Part plus exactly one example chapter entry that conforms to the schema, marked clearly as a placeholder/example. No real content.
 
 ## Acceptance criteria
 
-- `manuscript/toc/` exists and contains `README.md` plus exactly one stub file per Part covered by tasks 2.1–2.5.
-- `README.md` fully specifies: directory layout, file-naming convention, and the per-chapter schema (every field, required/optional, format) with at least one example.
-- The schema is consistent with both `PLAN.md` Phase 2 acceptance criteria and `bible/CHAPTER_TEMPLATE.md`; any intentional deviation is documented with rationale.
-- Each stub file validates against the documented schema and can be appended to without restructuring.
-- A reader of tasks 2.1–2.5 can determine, without further questions, which file to write and in what format.
+- `manuscript/toc/README.md` exists and specifies: the `part<N>-<slug>.md` convention, the 5 canonical filenames, the per-chapter schema (`title`, `Part`, `ordinal`, ≤120-word `premise`, `knowledge promise` line, `source DNA most relied on` line), and the precedence rule (PLAN.md authoritative for TOC; CHAPTER_TEMPLATE.md for full chapters).
+- All 5 stub files exist at the exact paths listed above.
+- Each stub is **thin**: header/frontmatter + a single example chapter entry only — no authored chapter content. The stubs are explicitly designed to be overwritten by tasks 2.1–2.5 (#52–56), each of which produces its own per-Part file as its deliverable into the same path. A coder reading a stub can populate it without changing its structure.
+- The schema in README.md is internally consistent with the one example entry shown in each stub.
 
 ## Risks
 
-- **Field mismatch between sources:** `PLAN.md` and `CHAPTER_TEMPLATE.md` may disagree; pick a precedence rule and document it to avoid churn.
-- **Part count / naming drift:** If tasks 2.1–2.5 assume different filenames or Part boundaries, stubs will be wrong — verify against the actual issue text before finalizing.
-- **Over-specification:** Locking the schema too tightly now may force rework once real chapters are written; keep optional fields clearly optional.
-- **Convention conflict:** Naming/format may clash with existing repo conventions elsewhere under `manuscript/`; check before committing.
+- **Clobber relationship (handled, not a hazard):** tasks 2.1–2.5 overwrite these exact files. This is intended. The mitigation — thin stubs whose structure matches the README schema — is built into the deliverable above so the later tasks fill rather than restructure.
+- **Source disagreement:** `PLAN.md` and `bible/CHAPTER_TEMPLATE.md` may list different per-chapter fields. Resolved by the precedence rule (PLAN.md wins for the TOC), documented permanently in README.md.
+- **Slug drift:** if a later issue references a Part filename with a different slug than locked here, the convention in README.md is the single source of truth; reconcile to these five names rather than introducing a parallel scheme.
