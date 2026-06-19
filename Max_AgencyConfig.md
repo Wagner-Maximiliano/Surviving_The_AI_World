@@ -14,7 +14,7 @@ Agency itself is never modified. Edit a value, **commit + push**, and the next g
 Edit the values inside this block:
 
 ```ini
-GATE_CODER_MODEL=deepseek/deepseek-v4-flash
+GATE_CODER_MODEL=openrouter/owl-alpha
 GATE_TRIAGE_MODEL=gpt-5.4-mini
 GATE_ARCHITECT_MODEL=opus
 GATE_CTO_MODEL=opus
