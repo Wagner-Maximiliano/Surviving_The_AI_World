@@ -10,7 +10,7 @@ This rubric pairs with `bible/SCENARIO_GROUNDING.md` (what counts as a real inci
 
 ## 1. The tiers
 
-### Tier 1 — Primary and peer-reviewed
+### Tier 1, Primary and peer-reviewed
 
 Always acceptable for any claim, including the central claims of a chapter.
 
@@ -20,15 +20,15 @@ Always acceptable for any claim, including the central claims of a chapter.
 - **Official corporate filings and statements of record.** SEC filings, official safety reports (e.g., Anthropic / OpenAI / Google DeepMind model cards and system cards published under the lab's name), audited annual reports.
 - **Named scientific and technical reports** from established research institutions (RAND, NIST, MITRE, Brookings) authored by named individuals.
 
-### Tier 2 — Established journalism and institutional research
+### Tier 2, Established journalism and institutional research
 
 Acceptable for any claim. The default tier for current-events evidence.
 
-- **Established journalism, long-form preferred.** *MIT Technology Review*, *Wired* (long-form only — not roundups or sponsored), *The Atlantic*, *The New Yorker*, *Financial Times*, *Bloomberg*, *Reuters*, the Associated Press, *The Washington Post*, *The New York Times*, *The Economist*, *The Guardian* (news desks), *ProPublica*, *Rest of World*.
+- **Established journalism, long-form preferred.** *MIT Technology Review*, *Wired* (long-form only, not roundups or sponsored), *The Atlantic*, *The New Yorker*, *Financial Times*, *Bloomberg*, *Reuters*, the Associated Press, *The Washington Post*, *The New York Times*, *The Economist*, *The Guardian* (news desks), *ProPublica*, *Rest of World*.
 - **Institutional research and policy work.** RAND Corporation, Future of Life Institute (FLI), Brookings, AI Now Institute, the Centre for the Governance of AI, the Stanford HAI policy briefs, the AI Index, the OECD AI Policy Observatory.
-- **Trade press in domain.** *IEEE Spectrum*, *Nature News*, *Science News* — when reporting on primary literature they reference.
+- **Trade press in domain.** *IEEE Spectrum*, *Nature News*, *Science News*, when reporting on primary literature they reference.
 
-### Tier 3 — Trade nonfiction by Source DNA authors
+### Tier 3, Trade nonfiction by Source DNA authors
 
 Acceptable for **thematic framing**, not for fresh factual claims. Use these to support an idea, an argument, or a way of seeing a problem; use Tier 1 or Tier 2 for the underlying facts.
 
@@ -36,9 +36,9 @@ Acceptable for **thematic framing**, not for fresh factual claims. Use these to 
 - **Named project field guides:** *SAS Survival Handbook* (Wiseman), *FM 21-76* (US Army Survival Manual), *Whole Earth Catalog* (Brand et al.), Cody Lundin's manuals.
 - **Other established trade nonfiction** by authors with a publication record and editorial review: acceptable case-by-case at the dossier author's judgment, with Sonnet spot-check.
 
-A Tier-3 source can frame a chapter's argument. It cannot be the sole citation for a fresh factual claim — a number, a named event, a measurement, a court ruling, a corporate position.
+A Tier-3 source can frame a chapter's argument. It cannot be the sole citation for a fresh factual claim, a number, a named event, a measurement, a court ruling, a corporate position.
 
-### Rejected — do not cite
+### Rejected, do not cite
 
 The following do not count as sources for this book. A dossier or chapter that cites them is sent back.
 
@@ -62,7 +62,7 @@ The following do not count as sources for this book. A dossier or chapter that c
 
 Paywalled Tier-1/2 sources are acceptable when an archive is available.
 
-1. The dossier author attempts a Wayback Machine snapshot (`web.archive.org`) at the live URL. If the snapshot is readable, both URLs go into the endnote — live and archive.
+1. The dossier author attempts a Wayback Machine snapshot (`web.archive.org`) at the live URL. If the snapshot is readable, both URLs go into the endnote, live and archive.
 2. If the Wayback snapshot is unavailable or blocked, the author tries Archive.today (`archive.ph`). Same rule: live URL + archive URL in the endnote.
 3. If neither archive resolves to the readable content, the author finds a different source. Paywalled-without-archive sources do not enter the book.
 4. For Tier-1 sources (court records, government documents) that are public-record by design but hosted behind a paywall (e.g., PACER), the docket reference itself is the canonical citation; the paywalled URL is supplementary.

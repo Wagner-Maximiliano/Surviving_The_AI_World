@@ -12,7 +12,7 @@ Calm, dry, confident, practical, intellectually serious. The chapters report wha
 
 ## 2. Reader stance
 
-The reader is intelligent and time-pressed. They may be skeptical of both AI hype and AI doom. They came with practical concerns — household, family, neighbourhood, livelihood — and a stronger-than-average tolerance for hard facts. They do not need to be sold, scared, flattered, or reassured. They expect to be told what is happening, what it means, and what to do, in that order, without padding. If a chapter would insult their intelligence, cut the part that does.
+The reader is intelligent and time-pressed. They may be skeptical of both AI hype and AI doom. They came with practical concerns, household, family, neighbourhood, livelihood, and a stronger-than-average tolerance for hard facts. They do not need to be sold, scared, flattered, or reassured. They expect to be told what is happening, what it means, and what to do, in that order, without padding. If a chapter would insult their intelligence, cut the part that does.
 
 ## 3. Voice rules
 
@@ -29,7 +29,7 @@ The reader is intelligent and time-pressed. They may be skeptical of both AI hyp
 
 Each pair shows a common drift mode and the corrected prose. All "before" examples are written to fail; all "after" examples are written to pass. Real incidents named in the "after" examples are real; placeholder citations would be filled at dossier time.
 
-### 4.1 Part 1 (Baseline) — practical drift: corporate
+### 4.1 Part 1 (Baseline), practical drift: corporate
 
 **Before (~50 words):**
 > In an era of unprecedented disruption, water security has emerged as a mission-critical concern for forward-looking households. By leveraging a holistic approach to source diversification, families can move the needle on resilience and create best-in-class outcomes for their preparedness journey going forward.
@@ -39,7 +39,7 @@ Each pair shows a common drift mode and the corrected prose. All "before" exampl
 
 *What changed:* every abstract noun replaced with a number, a verb, or a place. The reader knows what to do by the end of the paragraph.
 
-### 4.2 Part 2 (Disruption) — current AI drift: panic
+### 4.2 Part 2 (Disruption), current AI drift: panic
 
 **Before (~55 words):**
 > The terrifying explosion of deepfake technology has unleashed an unprecedented assault on the very fabric of human trust. We are entering a frightening new era where nothing can be believed, where every voice, every face, every word could be a lie. The implications are staggering, and we are dangerously unprepared.
@@ -49,7 +49,7 @@ Each pair shows a common drift mode and the corrected prose. All "before" exampl
 
 *What changed:* the temperature drops from "terrifying" to a date, a document, and a measurement. The chapter has somewhere to go now.
 
-### 4.3 Part 2 (Disruption) — academic drift
+### 4.3 Part 2 (Disruption), academic drift
 
 **Before (~45 words):**
 > The epistemological implications of generative models for the social construction of evidentiary trust are non-trivial and warrant sustained interdisciplinary engagement. One might argue that the very ontology of the photographic record is, in some sense, under reconsideration.
@@ -59,7 +59,7 @@ Each pair shows a common drift mode and the corrected prose. All "before" exampl
 
 *What changed:* abstract nouns and hedges replaced with a fact, a number, and a usable rule.
 
-### 4.4 Part 4 (Unknown) — speculative drift: breathless
+### 4.4 Part 4 (Unknown), speculative drift: breathless
 
 **Before (~55 words):**
 > Imagine a world where superintelligent AI has utterly transformed every aspect of human existence beyond recognition. Nothing will be the same. The very nature of what it means to be human is being rewritten in real time, and most people have absolutely no idea what is coming for them.
@@ -69,7 +69,7 @@ Each pair shows a common drift mode and the corrected prose. All "before" exampl
 
 *What changed:* the speculative claim is anchored to a named expert with a named figure, and the framing teaches a way to think about uncertainty rather than performing it.
 
-### 4.5 Part 4 (Unknown) — speculative drift: nihilism
+### 4.5 Part 4 (Unknown), speculative drift: nihilism
 
 **Before (~50 words):**
 > There is no point preparing for what is coming. Whatever you build, whatever skills you learn, whatever community you knit together, none of it will matter once the machines arrive. We are the last generation that gets to pretend any of this means anything.
@@ -79,7 +79,7 @@ Each pair shows a common drift mode and the corrected prose. All "before" exampl
 
 *What changed:* despair replaced with a probability frame and a directive that survives either outcome.
 
-### 4.6 Part 5 (Playbook) — synthesis drift: motivational
+### 4.6 Part 5 (Playbook), synthesis drift: motivational
 
 **Before (~50 words):**
 > You can do this! Building resilience is a journey, not a destination. Every small step you take today brings you closer to the empowered, unstoppable version of yourself you were always meant to be. Believe in your preparedness journey, and the universe will meet you halfway.
@@ -89,7 +89,7 @@ Each pair shows a common drift mode and the corrected prose. All "before" exampl
 
 *What changed:* exhortation replaced with a structure the reader can act on tonight.
 
-### 4.7 Part 1 (Baseline) — preachy drift
+### 4.7 Part 1 (Baseline), preachy drift
 
 **Before (~50 words):**
 > You really need to understand that community is everything. You should be reaching out to your neighbours right now, because at the end of the day, no one survives alone. It is critical that you prioritise these relationships before it is too late.
@@ -131,4 +131,4 @@ Synced with `styles/Surviving/banned-phrases.yml` as of 2026-06-02. Vale enforce
 
 ## 6. Calibration note: prepper audience, intellectually serious substance
 
-The audience is the prepper and practical-survival community. The Source DNA includes Tegmark, Harari, Ord, Suleyman, and RAND — writers who skew tech-policy. The risk is that those sources pull the prose toward seminar-room phrasing the prepper reader will, rightly, reject. The calibration is this: **substance from the policy literature, register from the field manual.** A chapter can cite Bostrom and still sound like it knows how to clear a chimney. It should. When in doubt, prefer the sentence a competent tradesperson would write about something they understand deeply — short, specific, and uninterested in impressing anyone. That sentence carries the policy idea further than the policy idea's native register ever would.
+The audience is the prepper and practical-survival community. The Source DNA includes Tegmark, Harari, Ord, Suleyman, and RAND, writers who skew tech-policy. The risk is that those sources pull the prose toward seminar-room phrasing the prepper reader will, rightly, reject. The calibration is this: **substance from the policy literature, register from the field manual.** A chapter can cite Bostrom and still sound like it knows how to clear a chimney. It should. When in doubt, prefer the sentence a competent tradesperson would write about something they understand deeply, short, specific, and uninterested in impressing anyone. That sentence carries the policy idea further than the policy idea's native register ever would.

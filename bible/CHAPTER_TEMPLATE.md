@@ -43,7 +43,7 @@ Schema rules:
 
 ## 2. Section order and rules
 
-Sections appear in the order below. Section headings are `##`. Subsection headings are `###`. No `#` headings inside a chapter file — the chapter title comes from frontmatter and is set by the build.
+Sections appear in the order below. Section headings are `##`. Subsection headings are `###`. No `#` headings inside a chapter file, the chapter title comes from frontmatter and is set by the build.
 
 ### `## Scenario`
 
@@ -70,7 +70,7 @@ The substantive content of the chapter. This is where the reader gets the model,
 |---|---|
 | Length | Bulk of the chapter. `word_target` minus ~300 (Scenario) minus ~250 (Field notes block) minus ~150 (Further reading) |
 | Structure | 3–6 named subsections (`###`). Each subsection covers one idea fully before the next begins |
-| Claims | Every non-trivial factual claim — numbers, named events, attributed positions, technical mechanisms — gets a numbered endnote |
+| Claims | Every non-trivial factual claim, numbers, named events, attributed positions, technical mechanisms, gets a numbered endnote |
 | Sourcing | Sources meet `bible/SOURCE_RUBRIC.md`. At least one Tier-1 or Tier-2 citation per non-trivial claim |
 | Voice | Authoritative without preaching. Defines terms on first use. No second-person scolding. No futurist jargon |
 | Cross-references | Use `(see Ch. X.Y)` for explicit cross-references; the Phase 4 pass verifies these resolve |
@@ -100,13 +100,13 @@ A boxed-style block of concrete actions the reader can take in the next week. Re
 
 ### `## Further reading`
 
-A short pointer block — not a substitute for the chapter's endnotes.
+A short pointer block, not a substitute for the chapter's endnotes.
 
 | Field | Rule |
 |---|---|
 | Count | 3–5 entries |
 | Source | Drawn from the project's Source DNA. At least one named author per Part across the book |
-| Format | `- *Title* — Author (Year). <One sentence on why this matters for the chapter>.` |
+| Format | `- *Title*, Author (Year). <One sentence on why this matters for the chapter>.` |
 | Annotation | The one-sentence note explains relevance to *this chapter*, not the book |
 | Forbidden | Articles already cited in the endnotes (these belong in endnotes, not here). Web-only pointers without a stable title. AI-generated summaries |
 
@@ -205,9 +205,9 @@ commodity cloud inference.[^3] [...]
 
 ## Further reading
 
-- *The Coming Wave* — Mustafa Suleyman (2023). Frames synthetic-media
+- *The Coming Wave*, Mustafa Suleyman (2023). Frames synthetic-media
   fraud as a containment problem rather than a detection problem.
-- *Deepfakes and the New Disinformation War* — Chesney & Citron (2019).
+- *Deepfakes and the New Disinformation War*, Chesney & Citron (2019).
   The earliest serious legal-policy treatment; still the clearest
   taxonomy.
 - *MIT Technology Review*, "The voice on the phone is a deepfake."

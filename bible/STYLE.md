@@ -1,6 +1,6 @@
 # Style Guide
 
-Mechanical conventions for *Surviving the AI World*. This file resolves the small decisions — numbers, units, dates, acronyms — so 30 chapters and several writers do not each invent their own answer.
+Mechanical conventions for *Surviving the AI World*. This file resolves the small decisions, numbers, units, dates, acronyms, so 30 chapters and several writers do not each invent their own answer.
 
 **Anchor:** *The Chicago Manual of Style*, 17th edition, is the default. Anything not specified below follows Chicago. The deltas below are intentional choices for this project.
 
@@ -37,9 +37,9 @@ This file pairs with `bible/VOICE.md` (register and rhetoric, which Chicago does
 ## 4. Acronyms and initialisms
 
 - **Spell out on first use**, abbreviation in parentheses: `the Federal Trade Commission (FTC)`. Use the abbreviation thereafter within the chapter.
-- **Standing exceptions** — always abbreviated, never spelled out: `AI`, `US`, `UK`, `EU`, `UN`, `NATO`, `URL`, `PDF`, `DNA`, `CEO`. ("US" and "UK" as adjectives; "the United States" and "the United Kingdom" as nouns where natural.)
+- **Standing exceptions**, always abbreviated, never spelled out: `AI`, `US`, `UK`, `EU`, `UN`, `NATO`, `URL`, `PDF`, `DNA`, `CEO`. ("US" and "UK" as adjectives; "the United States" and "the United Kingdom" as nouns where natural.)
 - **AI capitalisation:** `AI`, not `ai` or `A.I.`. Specific systems take their branded capitalisation: `GPT-5`, `Claude`, `Gemini`, `Llama 4`, `DeepSeek`, `o3`. Treat product names as proper nouns; do not pluralise with apostrophes (`three GPTs`, not `three GPT's`).
-- **Initialisms vs. acronyms:** Chicago default — both written without periods (`NIST`, `FBI`, `CISA`). Article choice follows pronunciation: `an FBI alert`, `a NIST publication`.
+- **Initialisms vs. acronyms:** Chicago default, both written without periods (`NIST`, `FBI`, `CISA`). Article choice follows pronunciation: `an FBI alert`, `a NIST publication`.
 
 ## 5. Names and references
 
@@ -62,15 +62,15 @@ This file pairs with `bible/VOICE.md` (register and rhetoric, which Chicago does
 ## 6. Quotations
 
 - **Direct quotation:** double quotes (American convention). Single quotes for nested quotation. `"She said, 'I will not.'"`
-- **Punctuation inside or outside quotes:** Chicago / American — commas and periods inside the closing quote; colons and semicolons outside; question marks and exclamation marks inside if part of the quoted material, outside otherwise.
+- **Punctuation inside or outside quotes:** Chicago / American, commas and periods inside the closing quote; colons and semicolons outside; question marks and exclamation marks inside if part of the quoted material, outside otherwise.
 - **Block quotations:** prose quotations of 100+ words use a blockquote (`>` in Markdown). No surrounding quote marks. Citation in the following endnote.
 - **Ellipses in quotations:** Chicago three-dot ellipsis with spaces (` … `). Bracketed when within a quotation.
 - **Square brackets** for editorial insertions inside quotations.
 
 ## 7. Em dashes, en dashes, hyphens
 
-- **Em dash (—):** unspaced. Chicago default. `The defence is not technical—it is procedural.`
-- **En dash (–):** ranges (`2024–2025`, `pages 12–15`) and compound modifiers with open compounds (`post–Cold War`).
+- **Em dash: never use it.** The em dash is a well-known AI writing tell and is banned in this book. CI enforces it as an error (`styles/Surviving/no-em-dash.yml`), so a single em dash fails the build. Rewrite with a comma, a colon, parentheses, or two sentences. Instead of `The defence is not technical[em dash]it is procedural.` write `The defence is not technical; it is procedural.` or split into two sentences.
+- **En dash (–):** ranges (`2024–2025`, `pages 12–15`) and compound modifiers with open compounds (`post–Cold War`). Use sparingly; in prose prefer `between X and Y`.
 - **Hyphen (-):** compound modifiers before a noun (`open-source model`, `peer-reviewed paper`); not after the noun (`the paper is peer reviewed`).
 
 ## 8. Citations
@@ -92,9 +92,9 @@ This file pairs with `bible/VOICE.md` (register and rhetoric, which Chicago does
 
 ## 9. Title case and section case
 
-- **Title case** — chapter titles and Part titles: capitalise the first and last words, and all other words except articles, coordinating conjunctions, and prepositions of four letters or fewer (Chicago).
+- **Title case**, chapter titles and Part titles: capitalise the first and last words, and all other words except articles, coordinating conjunctions, and prepositions of four letters or fewer (Chicago).
   - Example: `When the Voice on the Phone Is Not Your Daughter`.
-- **Sentence case** — every other heading level (`##`, `###`, `####`): capitalise the first word and proper nouns only.
+- **Sentence case**, every other heading level (`##`, `###`, `####`): capitalise the first word and proper nouns only.
   - Example: `## How voice cloning got cheap`.
 - **Frontmatter `title`** field uses title case (matches the chapter title).
 
@@ -135,12 +135,12 @@ This file pairs with `bible/VOICE.md` (register and rhetoric, which Chicago does
 | Institutions / systems | Spell out on first use unless a standing exception; preserve official product/model styling |
 | Prepper naming | Prefer concrete roles (`utility crew`, `county emergency manager`) over abstractions |
 | Quotes | Double for direct, single for nested; American punctuation |
-| Em dash | Unspaced — like this |
+| Em dash | **Never use** (AI tell, CI-blocked); rewrite with comma, colon, parentheses, or two sentences |
 | En dash | Ranges (`2024–2025`) and open compound modifiers (`post–Cold War`) |
 | Citations | Chicago notes-bibliography; numbered endnotes per chapter; archive URL non-optional |
 | Title case | Chapter titles and Parts only |
 | Sentence case | All sub-headings (`##`, `###`, `####`) |
-| Reader | `reader`, `household`, `you` (sparingly) — not `consumer`, `user`, `stakeholder` |
+| Reader | `reader`, `household`, `you` (sparingly), not `consumer`, `user`, `stakeholder` |
 | Lists | Numbered for sequence/rank; bulleted with `-` for unordered |
 | Code / paths / URLs | Monospace in body; full + archived in endnotes |
 | Banned phrases | See `bible/VOICE.md` §5 and `styles/Surviving/banned-phrases.yml` |

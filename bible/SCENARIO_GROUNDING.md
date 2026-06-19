@@ -71,13 +71,13 @@ Pure invention remains disallowed in Part 4. A Part 4 scenario without both (i) 
 
 ## 7. Length
 
-200 words ±25% (150–250 words). Hard cap at 250. Scenarios that run long get cut, not shrunk — find the one detail the rest of the scenario depends on and start there.
+200 words ±25% (150–250 words). Hard cap at 250. Scenarios that run long get cut, not shrunk, find the one detail the rest of the scenario depends on and start there.
 
 ## 8. Worked examples
 
 Two examples of acceptable scenario seeds. Each lists the real incident, two Tier-1/2 sources, and a 50-word sketch of how the scenario would open. Sources cited here are real; the sketches are illustrative.
 
-### 8.1 Part 2 (Disruption) — voice-cloning fraud
+### 8.1 Part 2 (Disruption), voice-cloning fraud
 
 **Real incident:** In May 2023, the FBI Internet Crime Complaint Center (IC3) issued Public Service Announcement I-051023-PSA warning of voice-cloning fraud against family members. Within twelve months, multiple US households had reported losses ranging from \$5,000 to over \$50,000 to scams using cloned voices of grandchildren or adult children.
 
@@ -87,9 +87,9 @@ Two examples of acceptable scenario seeds. Each lists the real incident, two Tie
 2. Pranshu Verma, "They thought loved ones were calling for help. It was an AI scam." *The Washington Post*, 5 March 2023. (Tier 2: established journalism.)
 
 **50-word opening sketch:**
-> The call comes at 11:14 on a Tuesday. The voice is her daughter's — the cadence, the small catch on the second syllable of "Mom." She is in a holding cell in Tijuana. She needs \$9,000 wired to a bondsman within the hour. The bondsman takes the phone.
+> The call comes at 11:14 on a Tuesday. The voice is her daughter's, the cadence, the small catch on the second syllable of "Mom." She is in a holding cell in Tijuana. She needs \$9,000 wired to a bondsman within the hour. The bondsman takes the phone.
 
-### 8.2 Part 4 (Unknown) — automated cyber-offensive capability
+### 8.2 Part 4 (Unknown), automated cyber-offensive capability
 
 **Real incident (i):** In 2023, researchers at Anthropic and external red teams documented language models successfully chaining publicly known CVEs into working exploits in controlled tests, with success rates rising materially between model generations. Reports were summarised in *MIT Technology Review* and in arXiv preprints from the relevant labs.
 
