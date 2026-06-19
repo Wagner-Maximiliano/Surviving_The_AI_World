@@ -1,0 +1,10 @@
+# Surviving.no-em-dash
+# Bans the em dash, a well-known LLM/AI writing tell. Blocking (error): the book
+# should not contain a single one. Rewrite with a comma, colon, parentheses, or
+# two sentences. (nonword: true is required to match punctuation, not a word.)
+extends: existence
+message: "Em dash found. Rewrite with a comma, colon, parentheses, or two sentences (no em dashes in the book)."
+level: error
+nonword: true
+tokens:
+  - '\x{2014}'

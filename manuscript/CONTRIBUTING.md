@@ -6,10 +6,10 @@ This manuscript is developed by a coordinated team of humans and AI agents follo
 
 Read these in order:
 
-1. [`README.md`](./README.md) — overview of the manuscript structure
-2. [`../PLAN.md`](../PLAN.md) — the full project roadmap and phase gates
-3. [`../bible/`](../bible/) — rules every chapter must follow (voice, structure, sourcing, grounding, field notes, style)
-4. [`../docs/AMA.md`](../docs/AMA.md) (in Max_Agency repo) — agent-to-agent coordination protocol
+1. [`README.md`](./README.md): overview of the manuscript structure
+2. [`../PLAN.md`](../PLAN.md): the full project roadmap and phase gates
+3. [`../bible/`](../bible/): rules every chapter must follow (voice, structure, sourcing, grounding, field notes, style)
+4. [`../docs/AMA.md`](../docs/AMA.md) (in Max_Agency repo): agent-to-agent coordination protocol
 
 ## Chapter structure
 
@@ -28,11 +28,11 @@ Chapter body...
 
 The chapter body must follow the template in `../bible/CHAPTER_TEMPLATE.md`:
 
-1. **Narrative scenario** — ~200 words, grounded in a real, documented incident
-2. **Core knowledge** — the chapter's main prose
-3. **Field notes** — 2-3 tangible, testable actions
-4. **Further reading** — pointers to deeper sources
-5. **Endnotes** — numbered references + bibliography entries
+1. **Narrative scenario**: ~200 words, grounded in a real, documented incident
+2. **Core knowledge**: the chapter's main prose
+3. **Field notes**: 2-3 tangible, testable actions
+4. **Further reading**: pointers to deeper sources
+5. **Endnotes**: numbered references + bibliography entries
 
 See `../bible/CHAPTER_TEMPLATE.md` for the full structure and rules.
 
@@ -89,7 +89,7 @@ Every chapter must meet ALL of these before merge:
 
 ## Field notes
 
-Field notes are the "so what?" at the end of every chapter — tangible actions readers can take in the next week. Each field note must be:
+Field notes are the "so what?" at the end of every chapter: tangible actions readers can take in the next week. Each field note must be:
 
 - **Testable by an individual or small group**
 - **Completable in <1 week**

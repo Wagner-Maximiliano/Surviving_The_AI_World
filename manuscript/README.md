@@ -1,4 +1,4 @@
-# Surviving the AI World — Manuscript
+# Surviving the AI World: Manuscript
 
 ## What's here
 
@@ -57,10 +57,10 @@ The linter enforces a calm, dry, confident voice. See `../styles/Surviving/banne
 
 Every chapter must follow the rules in `../bible/` (voice, structure, sourcing, grounding). Key constraints:
 
-- **Scenarios must cite real incidents** — no invented anecdotes.
-- **Claims must be sourced** — every non-trivial factual statement gets a numbered endnote + bibliography entry.
-- **Field notes must be testable** — tangible actions an individual or small group can do in <1 week.
-- **Voice is calm, dry, confident** — SAS Survival Handbook meets *Nexus*.
+- **Scenarios must cite real incidents**: no invented anecdotes.
+- **Claims must be sourced**: every non-trivial factual statement gets a numbered endnote + bibliography entry.
+- **Field notes must be testable**: tangible actions an individual or small group can do in <1 week.
+- **Voice is calm, dry, confident**: SAS Survival Handbook meets *Nexus*.
 
 ## Contributing
 
